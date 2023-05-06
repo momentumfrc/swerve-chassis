@@ -24,6 +24,9 @@ public final class MoPrefs {
     public static Pref<Double> chassis_size_x = doublePref("Chassis Size X", 1);
     public static Pref<Double> chassis_size_y = doublePref("Chassis Size Y", 1);
 
+    public static Pref<Double> maxLinearSpeed = doublePref("Maximum Linear Speed", 4);
+    public static Pref<Double> maxAngularSpeed = doublePref("Maximum Angular Speed", Math.PI);
+
     public final class Pref<T> {
         public final String key;
         private Function<NetworkTableValue, T> getter;
