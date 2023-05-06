@@ -12,7 +12,17 @@ import edu.wpi.first.networktables.NetworkTableValue;
 import edu.wpi.first.networktables.StringPublisher;
 
 public final class MoPrefs {
-    public static Pref<Double> placeholderPref = doublePref("Sample Pref", 6000.0);
+    public static Pref<Double> fl_zero = doublePref("FL_Zero", 0);
+    public static Pref<Double> fl_scale = doublePref("FL_Scale", 1);
+    public static Pref<Double> fr_zero = doublePref("FR_Zero", 0);
+    public static Pref<Double> fr_scale = doublePref("FR_Scale", 1);
+    public static Pref<Double> rl_zero = doublePref("RL_Zero", 0);
+    public static Pref<Double> rl_scale = doublePref("RL_Scale", 1);
+    public static Pref<Double> rr_zero = doublePref("RR_Zero", 0);
+    public static Pref<Double> rr_scale = doublePref("RR_Scale", 1);
+
+    public static Pref<Double> chassis_size_x = doublePref("Chassis Size X", 1);
+    public static Pref<Double> chassis_size_y = doublePref("Chassis Size Y", 1);
 
     public final class Pref<T> {
         public final String key;
