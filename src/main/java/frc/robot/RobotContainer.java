@@ -4,17 +4,28 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.commands.TeleopDriveCommand;
+import frc.robot.subsystems.DriveSubsystem;
 
 public class RobotContainer {
-  public RobotContainer() {
-    configureBindings();
-  }
 
-  private void configureBindings() {}
+    private DriveSubsystem drive = new DriveSubsystem();
 
-  public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
-  }
+    private XboxController xbox = new XboxController(0);
+
+    private TeleopDriveCommand teleopDriveCommand = new TeleopDriveCommand(drive, xbox);
+
+    public RobotContainer() {
+        drive.setDefaultCommand(teleopDriveCommand);
+        configureBindings();
+    }
+
+    private void configureBindings() {}
+
+    public Command getAutonomousCommand() {
+        return Commands.print("No autonomous command configured");
+    }
 }
