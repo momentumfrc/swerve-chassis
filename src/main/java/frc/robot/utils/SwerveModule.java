@@ -15,6 +15,8 @@ public class SwerveModule {
     private final String key;
     public final CANSparkMax turnMotor;
     public final WPI_TalonFX driveMotor;
+
+    // Note: the absolute encoder returns rotations, in the range [0, 1)
     public final AnalogEncoder absoluteEncoder;
 
     private final MoSparkMaxPID turnPID;
@@ -23,6 +25,7 @@ public class SwerveModule {
     private PIDTuner turnTuner;
     private PIDTuner driveTuner;
 
+    // Note: the relative encoder is scaled to return radians
     private final RelativeEncoder relativeEncoder;
 
     private final Pref<Double> encoderZero;
