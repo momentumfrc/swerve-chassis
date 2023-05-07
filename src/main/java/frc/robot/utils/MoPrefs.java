@@ -1,6 +1,7 @@
 package frc.robot.utils;
 
 import java.util.EnumSet;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -30,14 +31,16 @@ public final class MoPrefs {
     public final class Pref<T> {
         public final String key;
         private Function<NetworkTableValue, T> getter;
+        private BiFunction<NetworkTableEntry, T, Boolean> setter;
 
         private final NetworkTableEntry entry;
 
         private Consumer<T> subscriber = null;
 
-        public Pref(String key, T defaultValue, Function<NetworkTableValue, T> getter) {
+        public Pref(String key, T defaultValue, Function<NetworkTableValue, T> getter, BiFunction<NetworkTableEntry, T, Boolean> setter) {
             this.key = key;
             this.getter = getter;
+            this.setter = setter;
 
             this.entry = table.getEntry(key);
             this.entry.setDefaultValue(defaultValue);
@@ -46,6 +49,10 @@ public final class MoPrefs {
 
         public T get() {
             return getter.apply(entry.getValue());
+        }
+
+        public void set(T value) {
+            setter.apply(entry, value);
         }
 
         public void subscribe(Consumer<T> consumer) {
@@ -88,6 +95,6 @@ public final class MoPrefs {
     }
 
     private static Pref<Double> doublePref(String key, double defaultValue) {
-        return getInstance().new Pref<>(key, defaultValue, NetworkTableValue::getDouble);
+        return getInstance().new Pref<>(key, defaultValue, NetworkTableValue::getDouble, NetworkTableEntry::setDouble);
     }
 }

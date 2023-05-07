@@ -13,9 +13,9 @@ import frc.robot.utils.MoPrefs.Pref;
 
 public class SwerveModule {
     private final String key;
-    private final CANSparkMax turnMotor;
-    private final WPI_TalonFX driveMotor;
-    private final AnalogEncoder absoluteEncoder;
+    public final CANSparkMax turnMotor;
+    public final WPI_TalonFX driveMotor;
+    public final AnalogEncoder absoluteEncoder;
 
     private final MoSparkMaxPID turnPID;
     private final MoTalonFxPID drivePID;

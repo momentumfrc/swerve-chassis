@@ -15,10 +15,10 @@ import frc.robot.utils.SwerveModule;
 import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
-    private final SwerveModule frontLeft;
-    private final SwerveModule frontRight;
-    private final SwerveModule rearLeft;
-    private final SwerveModule rearRight;
+    public final SwerveModule frontLeft;
+    public final SwerveModule frontRight;
+    public final SwerveModule rearLeft;
+    public final SwerveModule rearRight;
 
     private final SwerveDriveKinematics kinematics;
 
