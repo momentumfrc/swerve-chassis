@@ -143,15 +143,33 @@ public class CalibrateEncodersCommand extends CommandBase {
 
     @Override
     public void execute() {
-        drive.frontLeft.directDrive(frontLeft.isFinished() ? 0 : CALIBRATE_SPEED, 0);
-        drive.frontRight.directDrive(frontRight.isFinished() ? 0 : CALIBRATE_SPEED, 0);
-        drive.rearLeft.directDrive(rearLeft.isFinished() ? 0 : CALIBRATE_SPEED, 0);
-        drive.rearRight.directDrive(rearRight.isFinished() ? 0 : CALIBRATE_SPEED, 0);
+        if(!frontLeft.isFinished()) {
+            drive.frontLeft.directDrive(CALIBRATE_SPEED, 0);
+            frontLeft.recordDataPoint();
+        } else {
+            drive.frontLeft.directDrive(0, 0);
+        }
 
-        frontLeft.recordDataPoint();
-        frontRight.recordDataPoint();
-        rearLeft.recordDataPoint();
-        rearRight.recordDataPoint();
+        if(!frontRight.isFinished()) {
+            drive.frontRight.directDrive(CALIBRATE_SPEED, 0);
+            frontRight.recordDataPoint();
+        } else {
+            drive.frontRight.directDrive(0, 0);
+        }
+
+        if(!rearLeft.isFinished()) {
+            drive.rearLeft.directDrive(CALIBRATE_SPEED, 0);
+            rearLeft.recordDataPoint();
+        } else {
+            drive.frontRight.directDrive(0, 0);
+        }
+
+        if(!rearRight.isFinished()) {
+            drive.rearRight.directDrive(CALIBRATE_SPEED, 0);
+            rearRight.recordDataPoint();
+        } else {
+            drive.frontRight.directDrive(0, 0);
+        }
     }
 
     @Override
