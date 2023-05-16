@@ -65,9 +65,9 @@ public class SwerveModule {
         relativeEncoder.setPositionConversionFactor(scale);
         relativeEncoder.setVelocityConversionFactor(scale);
 
-        double pos = absPos;
-        pos = (pos + 1 - absZero) % 1;
-        relativeEncoder.setPosition(pos);
+        double rots = absPos;
+        rots = (rots + 1 - absZero) % 1;
+        relativeEncoder.setPosition(AngleMath.rotToRad(rots));
     }
 
     public void drive(SwerveModuleState state) {

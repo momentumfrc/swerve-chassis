@@ -7,6 +7,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.utils.AngleMath;
 import frc.robot.utils.MoPrefs;
 
 public class CalibrateEncodersCommand extends CommandBase {
@@ -50,7 +51,7 @@ public class CalibrateEncodersCommand extends CommandBase {
          */
         private double getAbsRad() {
             double rots = (absEncoder.getAsDouble() + 1 - absZero) % 1;
-            return 2 * Math.PI * (rots - 0.5);
+            return AngleMath.rotToRad(rots);
         }
 
         /**
