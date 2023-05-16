@@ -1,5 +1,7 @@
 package frc.robot.utils;
 
+import java.util.Map;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.momentum4999.utils.PIDTuner;
@@ -9,6 +11,8 @@ import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.AnalogEncoder;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.utils.MoPrefs.Pref;
 
 public class SwerveModule {
@@ -55,6 +59,12 @@ public class SwerveModule {
         encoderZero.subscribe(zero -> this.setupRelativeEncoder(absoluteEncoder.get(), zero, encoderScale.get()), false);
         encoderScale.subscribe(scale -> this.setupRelativeEncoder(absoluteEncoder.get(), encoderZero.get(), scale), false);
         setupRelativeEncoder();
+
+        var layout = Shuffleboard.getTab("match").getLayout(key, BuiltInLayouts.kList)
+            .withSize(2, 1)
+            .withProperties(Map.of("Label position", "LEFT"));
+        layout.addDouble("Relative", () -> (AngleMath.radToRot(relativeEncoder.getPosition())));
+        layout.addDouble("Absolute", absoluteEncoder::get);
     }
 
     public void setupRelativeEncoder() {
