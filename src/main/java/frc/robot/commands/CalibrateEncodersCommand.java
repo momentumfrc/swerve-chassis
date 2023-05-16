@@ -179,12 +179,16 @@ public class CalibrateEncodersCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        if(interrupted) {
-            return;
-        }
-        MoPrefs.fl_scale.set(MoPrefs.fl_scale.get() * frontLeft.calculateCorrectionFactor());
-        MoPrefs.fr_scale.set(MoPrefs.fr_scale.get() * frontRight.calculateCorrectionFactor());
-        MoPrefs.rl_scale.set(MoPrefs.rl_scale.get() * rearLeft.calculateCorrectionFactor());
-        MoPrefs.rr_scale.set(MoPrefs.rr_scale.get() * rearRight.calculateCorrectionFactor());
+        if(frontLeft.isFinished())
+            MoPrefs.fl_scale.set(MoPrefs.fl_scale.get() * frontLeft.calculateCorrectionFactor());
+
+        if(frontRight.isFinished())
+            MoPrefs.fr_scale.set(MoPrefs.fr_scale.get() * frontRight.calculateCorrectionFactor());
+
+        if(rearLeft.isFinished())
+            MoPrefs.rl_scale.set(MoPrefs.rl_scale.get() * rearLeft.calculateCorrectionFactor());
+
+        if(rearRight.isFinished())
+            MoPrefs.rr_scale.set(MoPrefs.rr_scale.get() * rearRight.calculateCorrectionFactor());
     }
 }
