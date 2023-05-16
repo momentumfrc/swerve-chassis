@@ -35,7 +35,7 @@ public class SwerveModule {
     private final Pref<Double> encoderZero;
     private final Pref<Double> encoderScale;
 
-    public SwerveModule(String key, CANSparkMax turnMotor, WPI_TalonFX driveMotor, AnalogEncoder absoluteEncoder, Pref<Double> encoderZero, Pref<Double> encoderScale) {
+    public SwerveModule(String key, CANSparkMax turnMotor, WPI_TalonFX driveMotor, AnalogEncoder absoluteEncoder, Pref<Double> encoderZero, Pref<Double> encoderScale, boolean showPidTuners) {
         this.key = key;
         this.turnMotor = turnMotor;
         this.driveMotor = driveMotor;
@@ -51,8 +51,8 @@ public class SwerveModule {
         turnSparkMaxPID.setPositionPIDWrappingMaxInput(Math.PI);
         turnSparkMaxPID.setPositionPIDWrappingEnabled(true);
 
-        turnTuner = TunerUtils.forSparkMax(turnPID, key + "_turn");
-        driveTuner = TunerUtils.forTalonFx(drivePID, key + "_drive");
+        turnTuner = TunerUtils.forSparkMax(turnPID, key + "_turn", !showPidTuners);
+        driveTuner = TunerUtils.forTalonFx(drivePID, key + "_drive", !showPidTuners);
 
         relativeEncoder = turnMotor.getEncoder();
 

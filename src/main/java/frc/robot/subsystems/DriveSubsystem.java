@@ -29,7 +29,8 @@ public class DriveSubsystem extends SubsystemBase {
             new WPI_TalonFX(Constants.FL_DRIVE),
             new AnalogEncoder(Constants.FL_ENCODER),
             MoPrefs.fl_zero,
-            MoPrefs.fl_scale
+            MoPrefs.fl_scale,
+            true
         );
 
         frontRight = new SwerveModule(
@@ -38,7 +39,8 @@ public class DriveSubsystem extends SubsystemBase {
             new WPI_TalonFX(Constants.FR_DRIVE),
             new AnalogEncoder(Constants.FR_ENCODER),
             MoPrefs.fr_zero,
-            MoPrefs.fr_scale
+            MoPrefs.fr_scale,
+            false
         );
 
         rearLeft = new SwerveModule(
@@ -47,7 +49,8 @@ public class DriveSubsystem extends SubsystemBase {
             new WPI_TalonFX(Constants.RL_DRIVE),
             new AnalogEncoder(Constants.RL_ENCODER),
             MoPrefs.rl_zero,
-            MoPrefs.rl_scale
+            MoPrefs.rl_scale,
+            false
         );
 
         rearRight = new SwerveModule(
@@ -56,7 +59,8 @@ public class DriveSubsystem extends SubsystemBase {
             new WPI_TalonFX(Constants.RR_DRIVE),
             new AnalogEncoder(Constants.RR_ENCODER),
             MoPrefs.rr_zero,
-            MoPrefs.rr_scale
+            MoPrefs.rr_scale,
+            false
         );
 
         this.kinematics = getKinematics();
