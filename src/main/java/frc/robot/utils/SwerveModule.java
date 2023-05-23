@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
@@ -83,8 +84,9 @@ public class SwerveModule {
     }
 
     public void drive(SwerveModuleState state) {
-        turnPID.setReference(MathUtil.angleModulus(state.angle.getRadians()));
-        drivePID.setReference(state.speedMetersPerSecond * driveMtrScale.get());
+        var optimized = SwerveModuleState.optimize(state, Rotation2d.fromRadians(relativeEncoder.getPosition()));
+        turnPID.setReference(MathUtil.angleModulus(optimized.angle.getRadians()));
+        drivePID.setReference(optimized.speedMetersPerSecond * driveMtrScale.get());
     }
 
     public void directDrive(double turnSpeed, double driveSpeed) {
