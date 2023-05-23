@@ -34,17 +34,19 @@ public class SwerveModule {
 
     private final Pref<Double> encoderZero;
     private final Pref<Double> encoderScale;
+    private final Pref<Double> driveMtrScale;
 
-    public SwerveModule(String key, CANSparkMax turnMotor, WPI_TalonFX driveMotor, AnalogEncoder absoluteEncoder, Pref<Double> encoderZero, Pref<Double> encoderScale, boolean showPidTuners) {
+    public SwerveModule(String key, CANSparkMax turnMotor, WPI_TalonFX driveMotor, AnalogEncoder absoluteEncoder, Pref<Double> encoderZero, Pref<Double> encoderScale, Pref<Double> driveMtrScale, boolean showPidTuners) {
         this.key = key;
         this.turnMotor = turnMotor;
         this.driveMotor = driveMotor;
         this.absoluteEncoder = absoluteEncoder;
         this.encoderZero = encoderZero;
         this.encoderScale = encoderScale;
+        this.driveMtrScale = driveMtrScale;
 
         this.turnPID = new MoSparkMaxPID(MoSparkMaxPID.Type.POSITION, turnMotor, 0);
-        this.drivePID = new MoTalonFxPID(MoTalonFxPID.Type.POSITION, driveMotor);
+        this.drivePID = new MoTalonFxPID(MoTalonFxPID.Type.VELOCITY, driveMotor);
 
         var turnSparkMaxPID = turnPID.getPID();
         turnSparkMaxPID.setPositionPIDWrappingMinInput(-Math.PI);
@@ -82,7 +84,7 @@ public class SwerveModule {
 
     public void drive(SwerveModuleState state) {
         turnPID.setReference(MathUtil.angleModulus(state.angle.getRadians()));
-        drivePID.setReference(state.speedMetersPerSecond);
+        drivePID.setReference(state.speedMetersPerSecond * driveMtrScale.get());
     }
 
     public void directDrive(double turnSpeed, double driveSpeed) {

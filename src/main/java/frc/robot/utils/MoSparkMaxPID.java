@@ -5,6 +5,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
+import edu.wpi.first.math.MathUtil;
+
 public class MoSparkMaxPID implements PIDGraphValues {
     private final Type type;
     private final CANSparkMax motorController;
@@ -68,7 +70,7 @@ public class MoSparkMaxPID implements PIDGraphValues {
         switch (this.type) {
             case POSITION:
             case SMARTMOTION:
-                return this.encoder.getPosition();
+                return MathUtil.angleModulus(this.encoder.getPosition());
             case VELOCITY:
             case SMARTVELOCITY:
                 return this.encoder.getVelocity();

@@ -22,6 +22,13 @@ public final class MoPrefs {
     public static Pref<Double> rr_zero = doublePref("RR_Zero", 0);
     public static Pref<Double> rr_scale = doublePref("RR_Scale", 1);
 
+
+    // MtrScale: units of ticks per meter
+    public static Pref<Double> fl_driveMtrScale = doublePref("FL_driveMtrScale", 1);
+    public static Pref<Double> fr_driveMtrScale = doublePref("FR_driveMtrScale", 1);
+    public static Pref<Double> rl_driveMtrScale = doublePref("RL_driveMtrScale", 1);
+    public static Pref<Double> rr_driveMtrScale = doublePref("RR_driveMtrScale", 1);
+
     public static Pref<Double> chassis_size_x = doublePref("Chassis Size X", 1);
     public static Pref<Double> chassis_size_y = doublePref("Chassis Size Y", 1);
 

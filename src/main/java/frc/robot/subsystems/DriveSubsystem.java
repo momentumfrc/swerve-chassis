@@ -9,6 +9,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.AnalogEncoder;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.MoPrefs;
 import frc.robot.utils.SwerveModule;
@@ -30,6 +31,7 @@ public class DriveSubsystem extends SubsystemBase {
             new AnalogEncoder(Constants.FL_ENCODER),
             MoPrefs.fl_zero,
             MoPrefs.fl_scale,
+            MoPrefs.fl_driveMtrScale,
             true
         );
 
@@ -40,6 +42,7 @@ public class DriveSubsystem extends SubsystemBase {
             new AnalogEncoder(Constants.FR_ENCODER),
             MoPrefs.fr_zero,
             MoPrefs.fr_scale,
+            MoPrefs.fr_driveMtrScale,
             false
         );
 
@@ -50,6 +53,7 @@ public class DriveSubsystem extends SubsystemBase {
             new AnalogEncoder(Constants.RL_ENCODER),
             MoPrefs.rl_zero,
             MoPrefs.rl_scale,
+            MoPrefs.rl_driveMtrScale,
             false
         );
 
@@ -60,10 +64,14 @@ public class DriveSubsystem extends SubsystemBase {
             new AnalogEncoder(Constants.RR_ENCODER),
             MoPrefs.rr_zero,
             MoPrefs.rr_scale,
+            MoPrefs.rr_driveMtrScale,
             false
         );
 
         this.kinematics = getKinematics();
+
+        Shuffleboard.getTab("match").addDouble("FL_POS", frontLeft.driveMotor::getSelectedSensorPosition);
+        Shuffleboard.getTab("match").addDouble("FL_POS_m", () -> frontLeft.driveMotor.getSelectedSensorPosition() / MoPrefs.fl_driveMtrScale.get());
     }
 
     private SwerveDriveKinematics getKinematics() {

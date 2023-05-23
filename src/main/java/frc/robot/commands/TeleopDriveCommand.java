@@ -43,8 +43,8 @@ public class TeleopDriveCommand extends CommandBase {
     @Override
     public void execute() {
         double fwdRequest = controller.getLeftY();
-        double leftRequest = -1 * controller.getLeftX();
-        double turnRequest = -1 * controller.getRightX();
+        double leftRequest = controller.getLeftX();
+        double turnRequest = controller.getRightX();
 
         fwdRequest = transform(fwdRequest);
         leftRequest = transform(leftRequest);
