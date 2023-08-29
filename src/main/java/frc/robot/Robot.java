@@ -16,6 +16,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
+
+    addPeriodic(m_robotContainer.getDrive()::setRelativePosition, 1);
   }
 
   @Override

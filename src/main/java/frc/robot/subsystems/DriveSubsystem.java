@@ -93,4 +93,11 @@ public class DriveSubsystem extends SubsystemBase {
         rearRight.drive(states[3]);
     }
 
+    public void setRelativePosition() {
+        frontLeft.setRelativePosition();
+        frontRight.setRelativePosition();
+        rearLeft.setRelativePosition();
+        rearRight.setRelativePosition();
+    }
+
 }

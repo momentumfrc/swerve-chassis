@@ -74,10 +74,18 @@ public class SwerveModule {
         setupRelativeEncoder(absoluteEncoder.get(), encoderZero.get(), encoderScale.get());
     }
 
+    public void setRelativePosition() {
+        setRelativePosition(absoluteEncoder.get(), encoderZero.get());
+    }
+
     private void setupRelativeEncoder(double absPos, double absZero, double scale) {
         relativeEncoder.setPositionConversionFactor(scale);
         relativeEncoder.setVelocityConversionFactor(scale);
 
+        setRelativePosition(absPos, absZero);
+    }
+
+    private void setRelativePosition(double absPos, double absZero) {
         double rots = absPos;
         rots = (rots + 1 - absZero) % 1;
         relativeEncoder.setPosition(AngleMath.rotToRad(rots));
